@@ -14,20 +14,31 @@
  */
 export function isPalindromePermutationsSet(str) {
   if (!str) {
-    return false;
+    return false
   }
-
-  let chars = new Set();
-  for (let char of str) {
-    if (char !== ' ') { // ignore spaces
-      if (chars.has(char)) {
-        chars.delete(char);
-      }
-      else {
-        chars.add(char);
+  if (str === [] || str === ' ') {
+    return true
+  }
+  var hash = {}
+  for (let i = 0; i < str.length; i ++) {
+    if (hash[str[i]] !== undefined) {
+      hash[str[i]] ++
+    }
+    else {
+      hash[str[i]] = 1
+    }
+  }
+  var counter = 0
+  for (let c = 0; c < Object.keys(hash).length; c ++) {
+    if (counter > 1) {
+      return false
+    }
+    else {
+      if (hash[Object.keys(hash)[c]] === 1) {
+        counter ++
       }
     }
   }
+  return true
 
-  return chars.size <= 1;
 }
