@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * Keep track of seen characters with a Set data structure, fail when
@@ -10,16 +10,22 @@
  * @param  {string[]} str String to check, passed in as a character array
  * @return {boolean}      True if unique characters, otherwise false
  */
-export function hasUniqueCharactersSet(str) {
-  let chars = new Set();
+export function hasUniqueCharactersSet(set){
+  var check = {}
+  var counter = 0
+  for (let i = 0; i < set.length; i ++) {
+    counter = counter + 1
+    if (check[set[i]] !== undefined){
 
-  for (let i = 0; i < str.length; ++i) {
-    if (chars.has(str[i])) {
-      return false;
+      return false
     }
-    chars.add(str[i]);
+    else {
+      check[set[i]] = 1
+    }
+
   }
-  return true;
+
+  return true
 }
 
 /**
@@ -35,12 +41,29 @@ export function hasUniqueCharactersSet(str) {
  */
 export function hasUniqueCharactersSort(str) {
   // sort string using quicksort
-  str.sort();
-
-  for (var i = 1; i < str.length; ++i) {
-    if (str[i] === str[i - 1]) {
-      return false;
+  console.log('first')
+  var sorted = sort(str)
+  for (let i = 0; i < str.length; i ++) {
+    if (str[i] === str[i + 1]) {
+      return false
     }
   }
-  return true;
+  return true
+  }
+
+
+function sort(string) {
+  console.log(string)
+  for (let i = string.length; i >= 0; i --) {
+    for (let j = 0; j < i; j ++) {
+      if (string[j+1] < string[j]) {
+        let bubble = string[j+1]
+        string[j + 1] = string[j]
+        string[j] = bubble
+
+    }
+    }
+  }
+  console.log(string)
+  return string
 }

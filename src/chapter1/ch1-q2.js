@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * Keep track of characters counts with a Map data structure, fail when
@@ -14,30 +14,34 @@
  * @return {boolean}       True if first and second strings are permutations otherwise false
  */
 export function isPermutationMap(str1, str2) {
-  if (str1.length === 0 || str1.length !== str2.length) {
-    return false;
+  if (str1.length !== str2.length) {
+    return false
+
   }
-
-  let chars = new Map();
-
-  for (let i = 0; i < str1.length; ++i) {
-    chars.set(str1[i], chars.get(str1[i]) + 1 || 1); // increment or set to 1
-  }
-
-  for (let i = 0; i < str2.length; ++i) {
-    let count = chars.get(str2[i]);
-    if (!count) {
-      return false;
+  var map1 = {}
+  var map2 = {}
+  for (let i = 0; i < str1.length; i ++) {
+    if (map1[str1[i]] !== undefined) {
+      map1[str1[i]] = map1[str1[i]] + 1
     }
-    if (count === 1) {
-      chars.delete(str2[i]);
-    }
-    else {
-      chars.set(str2[i], count - 1);
+    else{
+      map1[str1[i]] = 1
     }
   }
-
-  return chars.size === 0;
+  for (let i = 0; i < str2.length; i ++) {
+    if (map2[str2[i]] !== undefined) {
+      map2[str2[i]] = map2[str2[i]] + 1
+    }
+    else{
+      map2[str2[i]] = 1
+    }
+  }
+  for (let i = 0; i < str2.length; i ++) {
+    if (map1[str2[i]] !== map2[str2[i]]){
+      return false
+    }
+  }
+  return true
 }
 
 /**
