@@ -18,27 +18,43 @@
  */
 export function isOneOrLessAway(str1, str2) {
   // if lengths differ by more than 1 then can't be true
-  if (Math.abs(str1.length - str2.length) > 1) {
-    return false;
+  if (str1 === str2) {
+    return true
   }
+  if (Math.abs(str1.length - str2.length) > 1) {
+    return false
+  }
+  if (str1.length === str2.length) {
+      let oneAway = false
 
-  let isEdited = false;
-  for (let i = 0, j = 0; i < str1.length && j < str2.length; ++i, ++j) {
-    if (str1[i] !== str2[j]) {
-      if (isEdited) {
-        // second edit
-        return false;
-      }
+      for (let i = 0; i < str1.length; i ++) {
+        if (str1[i] !== str2[i]) {
+          if (oneAway) {
+            return false
 
-      if (str1.length > str2.length) {
-        --j; // decrease j, we are deleting char from str1
+          }
+          else {
+            oneAway = true
+          }
+        }
       }
-      else if (str1.length < str2.length) {
-        --i; // decrease i, we are deleting char from str2
+  }
+  if (str1.length > str2.length) {
+    let oneAway = false
+    for (let i = 0; i < str2.length; i ++) {
+      if (str1[i] !== str2[i] && str1[i+1] !== str2[i]) {
+        return false
       }
-      isEdited = true;
     }
   }
+  else if (str2.length > str1.length) {
+    let oneAway = false
+    for (let i = 0; i < str1.length; i ++) {
+      if (str2[i] !== str1[i] && str2[i+1] !== str1[i]) {
+        return false
+      }
+    }
 
-  return true;
+  }
+  return true
 }
