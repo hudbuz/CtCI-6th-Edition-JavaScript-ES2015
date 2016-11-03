@@ -15,19 +15,25 @@ export function compressString(str) {
   if (!str) {
     return str;
   }
-
-  let cStr = '';
-  for (let i = 0; i < str.length; ++i) {
-    let char = str[i],
-      start = i;
-    while (i + 1 < str.length && char === str[i + 1]) {
-      ++i;
+  let nuString = ''
+  let compressed = 1
+  for (let i = 0; i < str.length; i ++) {
+    if (str[i] === str[i+1]) {
+      compressed ++
     }
-    // JS does not have a StringBuilder/StringBuffer style class for creating strings
-    // string concatenation has been heavily optimised in JS implementations and
-    // is faster than creating a string via an array then using a .join('') at the end
-    cStr += (i - start + 1) + char;
+    else {
+
+      nuString += compressed
+      nuString += str[i]
+
+      compressed = 1
+    }
+  }
+  if (nuString.length >= str.length) {
+  return str
+  }
+  else {
+    return nuString
   }
 
-  return cStr.length < str.length ? cStr : str;
 }
