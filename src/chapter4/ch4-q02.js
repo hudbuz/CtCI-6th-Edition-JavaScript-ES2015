@@ -13,21 +13,26 @@ import { Tree } from './helpers';
  * Additional space: O(N)
  */
 export function makeBalancedTree(values) {
-  let tree = new Tree();
+
   if (values && values.length) {
-    add(tree, values, 0, values.length - 1);
+
+    add(values, 0, values.length - 1);
   }
-  return tree;
+
 }
 
-function add(tree, values, start, end) {
-  if (start === end) {
-    tree.add(values[start]);
+function add(values, start, end) {
+
+  if (end < start) {
+    return null;
   }
-  else if (start < end) {
-    let mid = start + Math.floor((end - start) / 2);
+
+  else{
+    let mid = (start + end) / 2
+    var tree = new Tree();
     tree.add(values[mid]);
-    add(tree, values, start, mid - 1);
-    add(tree, values, mid + 1, end);
+    tree.left = add(values, start, mid - 1);
+    tree.right = add(values, mid + 1, end);
   }
+  return tree
 }

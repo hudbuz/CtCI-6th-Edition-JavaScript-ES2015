@@ -15,26 +15,27 @@ export function isBalanced(tree) {
     return true;
   }
 
-  let node = tree.root,
-    cache = {
-      min: Number.MAX_SAFE_INTEGER,
-      max: Number.MIN_SAFE_INTEGER
-    };
-
-  findDepth(cache, node, 0);
-  return cache.max - cache.min <= 1;
+  var rootNode = tree.root
+  var params = {
+    min: Number.MAX_SAFE_INTEGER,
+    max: Number.MIN_SAFE_INTEGER
+  }
+  findDepth(params, rootNode, 0)
+  return params.max - params.min <= 1
 }
 
-function findDepth(cache, node, depth) {
-  if (!node) {
-    if (depth < cache.min) {
-      cache.min = depth;
+function findDepth(numberStore, node, depth){
+  if (!node){
+    if (numberStore.min > depth){
+      numberStore.min = depth
     }
-    if (depth > cache.max) {
-      cache.max = depth;
+    if (numberStore.max < depth) {
+      numberStore.max = depth
     }
-  } else {
-    findDepth(cache, node.left, depth + 1);
-    findDepth(cache, node.right, depth + 1);
+
+  }
+  else{
+    findDepth(numberStore, node.left, depth +1)
+    findDepth(numberStore, node.right, depth + 1)
   }
 }

@@ -21,6 +21,8 @@ export function partition(list, val) {
     if (node.val >= val) {
       if (!largerTail) {
         largerHead = largerTail = node;
+        console.log(largerHead)
+        console.log(largerTail)
       }
       else {
         largerTail = largerTail.next = node;

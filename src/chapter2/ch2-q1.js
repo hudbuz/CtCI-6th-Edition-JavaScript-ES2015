@@ -12,22 +12,22 @@ export function removeDuplicatesSet(list) {
   if (!list) {
     return list;
   }
-
-  let seen = new Set(),
-    node = list;
-
-  // add head
-  seen.add(node.val);
-  while (node.next) {
-    if (seen.has(node.next.val)) {
-      // skip next node
-      node.next = node.next.next;
+  let newList = {}
+  let nodeArray = []
+  var currentNode = list
+  while (currentNode !== null) {
+    let next = currentNode.next
+    if (newList[currentNode.val] === undefined){
+      debugger
+      newList[currentNode.val] = 1
+      nodeArray.push(currentNode.val)
+      currentNode = next
     }
     else {
-      seen.add(node.next.val);
-      node = node.next;
+      currentNode = next
     }
   }
+  console.log(nodeArray)
 
-  return list; // return list, head will never change
+  return nodeArray; // return list, head will never change
 }

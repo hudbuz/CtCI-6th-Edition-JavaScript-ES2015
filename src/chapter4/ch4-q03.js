@@ -12,19 +12,16 @@ import { LinkedList } from './helpers';
  */
 export function listTreeByDepthOrder(tree) {
   let lists = [];
-  addToList(lists, tree.root, 0);
-  return lists;
-}
-
-function addToList(lists, node, depth) {
-  if (node) {
-    if (!lists[depth]) {
-      lists[depth] = new LinkedList();
-    }
-
-    lists[depth].append(node.val);
-
-    addToList(lists, node.left, depth + 1);
-    addToList(lists, node.right, depth + 1);
+  addToList(tree.root, lists, 0)
+  return lists
   }
+
+function addToList(root, lists, depth) {
+  if (lists[depth] === undefined){
+    lists[depth] = new LinkedList();
+  }
+
+  lists[depth].append(root.val)
+  addToList(root.left, lists, depth +1)
+  addToList(root.right, lists, depth + 1)
 }

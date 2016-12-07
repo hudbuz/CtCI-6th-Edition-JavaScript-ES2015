@@ -20,19 +20,19 @@ export function kthToLastTwoPointers(list, k) {
   let last = list,
     kth = list;
 
-  for (let i = 0; i < k; ++i) {
-    last = last.next;
-    if (!last) {
-      throw new Error('list is not long enough');
+  for (var i = 0; i < k; i ++) {
+    last = last.next
+  }
+  while (last !== null) {
+    kth = kth.next
+
+    if (last.next === null) {
+      return kth.val
+    }
+    else{
+      last = last.next
     }
   }
-
-  while (last.next) {
-    last = last.next;
-    kth = kth.next;
-  }
-
-  return kth.val;
 }
 
 /**
@@ -48,18 +48,20 @@ export function kthToLastLength(list, k) {
   if (!list) {
     throw new Error('invalid list');
   }
-
-  let len = getLength(list),
-    skip = len - k,
-    node = list;
-
-  if (skip <= 0) {
-    throw new Error('list is not long enough');
+  var currentNode = list
+  var length = 0
+  while (currentNode !== null) {
+    length ++
+    currentNode = currentNode.next
+  }
+  while (list !== null) {
+    length --
+    list = list.next
+    if (length-1 === k) {
+      return list.val
+    }
   }
 
-  for (let i = 1; i < skip; ++i) {
-    node = node.next;
-  }
 
-  return node.val;
+
 }

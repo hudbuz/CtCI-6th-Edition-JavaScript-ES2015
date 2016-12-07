@@ -21,12 +21,14 @@ export function isValidBST(tree) {
 }
 
 function isValidBSTRecursive(node, min, max) {
-  if (node) {
-    if (node.val < min || node.val > max) {
-      return false;
+  if (node){
+    if (node < min || node > max ){
+      return false
     }
-    return isValidBSTRecursive(node.left, min, node.val) &&
-      isValidBSTRecursive(node.right, node.val, max);
+    else {
+      isValidBSTRecursive(node.left, min, node.val - 1)
+      isValidBSTRecursive(node.right, node, max)
+    }
   }
   return true;
 }
